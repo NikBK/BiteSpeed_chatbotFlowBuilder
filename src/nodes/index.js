@@ -1,5 +1,6 @@
 import { MessageNode } from "./MessageNode";
 import { PositionLoggerNode } from "./PositionLoggerNode";
+import { TextNode } from "./TextNode";
 
 export const initialNodes = [
     // {
@@ -36,5 +37,6 @@ export const initialNodes = [
 export const nodeTypes = {
     "position-logger": PositionLoggerNode,
     "msg-node": MessageNode,
+    "text-node": TextNode,
     // Add any of your custom nodes here!
 };

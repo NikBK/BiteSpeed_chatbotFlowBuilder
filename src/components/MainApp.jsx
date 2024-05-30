@@ -8,9 +8,9 @@ import { edgeTypes } from '../edges';
 const MainApp = ({ nodes, onNodesChange, edges, onEdgesChange, onConnect }) => {
     return (
         <>
-            <div className="w-20 p-10 bg-color-f0f0f0">
+            <aside className="w-20 py-20 px-10 bg-color-f0f0f0 flex flex-col justify-between" >
                 <NodesPanel />
-            </div>
+            </aside>
 
             <div className="flex-1">
                 <ReactFlow

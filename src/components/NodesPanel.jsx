@@ -10,21 +10,31 @@ export const NodesPanel = () => {
 
     return (
         <>
-            <h3 className="text-center">Sidebar</h3>
+            <div>
+                <h3 className="text-center">Sidebar</h3>
 
-            <div className="flex flex-col gap-10">
-                <Dragger
-                    classes={draggerClassNames}
-                    dragStart={(event) => handleDragStart(event, 'msg-node')}
-                    content="message"
-                />
+                <div className="flex flex-col gap-10">
+                    <Dragger
+                        classes={draggerClassNames}
+                        dragStart={(event) => handleDragStart(event, 'msg-node')}
+                        content="message"
+                    />
 
-                <Dragger
-                    classes={draggerClassNames}
-                    dragStart={(event) => handleDragStart(event, 'node', 'test node')}
-                    content="non-message"
-                />
+                    <Dragger
+                        classes={draggerClassNames}
+                        dragStart={(event) => handleDragStart(event, 'text-node', 'text node')}
+                        content="text"
+                    />
+
+                    <Dragger
+                        classes={draggerClassNames}
+                        dragStart={(event) => handleDragStart(event, 'node', 'testing node')}
+                        content="non-message"
+                    />
+                </div>
             </div>
+
+            <button className="pointer">Save Changes</button>
         </>
     );
 };
