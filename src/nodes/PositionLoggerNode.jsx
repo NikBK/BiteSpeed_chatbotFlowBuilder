@@ -20,7 +20,7 @@ export function PositionLoggerNode({
                 {x} {y}
             </div>
 
-            <Handle type="source" position={Position.Bottom} />
+            <Handle type="source" position={Position.Bottom} id="position-logger-source" />
         </div>
     );
 }

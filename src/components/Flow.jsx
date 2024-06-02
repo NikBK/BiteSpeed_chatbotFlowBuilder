@@ -7,6 +7,11 @@ import { FlowContext } from '../store';
 import { NodesPanel, SettingsPanel } from './index.js';
 
 
+const connectionLineStyle = {
+    strokeWidth: 2,
+    stroke: 'black',
+};
+
 const Flow = () => {
     const { nodes, edges, onNodesChange, onEdgesChange, onConnect } = useContext(FlowContext);
 
@@ -26,6 +31,7 @@ const Flow = () => {
                     onEdgesChange={onEdgesChange}
                     onConnect={onConnect}
                     fitView
+                    connectionLineStyle={connectionLineStyle}
                 >
                     <Background />
                     <Controls />

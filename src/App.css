@@ -11,6 +11,10 @@ body,
     margin: 0;
 }
 
+.react-flow__edge.selected .react-flow__edge-path {
+    stroke: #555 !important;
+}
+
 .w-full {
     width: 100%;
 }
@@ -33,6 +37,18 @@ body,
 
 .max-h-200 {
     max-height: 200px;
+}
+
+.max-w-200 {
+    max-width: 200px;
+}
+
+.min-h-20 {
+    min-height: 20px;
+}
+
+.min-w-60 {
+    min-width: 60px;
 }
 
 .h-100vh {
@@ -93,6 +109,10 @@ body,
     background-color: #b2f0e3;
 }
 
+.bg-color-f1f0f1 {
+    background-color: #f1f0f1;
+}
+
 .text-center {
     text-align: center;
 }
@@ -103,4 +123,29 @@ body,
 
 .b-1-ccc {
     border: 1px solid #ccc;
+}
+
+.p-0 {
+    padding: 0;
+}
+
+.min-h-8 {
+    min-height: 2rem;
+}
+
+.items-center {
+    align-items: center;
+}
+
+.custom-shadow {
+    box-shadow: 0px 4px 10px 0px;
+}
+
+.text-5d69b3 {
+    color: #5d69b3;
+}
+
+.px-5 {
+    padding-left: 5px;
+    padding-right: 5px;
 }

@@ -19,12 +19,12 @@ export function TextNode({ data }) {
             <Handle
                 type="target"
                 position={Position.Left}
-                id="a"
+                id="text-target"
             />
             <Handle
                 type="source"
                 position={Position.Right}
-                id="b"
+                id="input-source"
             />
         </div>
     );

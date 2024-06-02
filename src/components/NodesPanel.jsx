@@ -1,8 +1,9 @@
 import { nodeNames } from "../nodes/index.js";
 import { Dragger } from "./index.js";
+import { faCommentDots } from '@fortawesome/free-regular-svg-icons';
 
 
-const draggerClassNames = "p-8 text-center pointer b-1-ccc";
+const draggerClassNames = "p-8 text-center pointer b-1-ccc text-5d69b3";
 
 export const NodesPanel = () => {
     const handleDragStart = (event, type, msg) => {
@@ -13,13 +14,14 @@ export const NodesPanel = () => {
     return (
         <>
             <div>
-                <h3 className="text-center">Sidebar</h3>
+                <h3 className="text-center">Nodes Panel</h3>
 
                 <div className="flex flex-col gap-10">
                     <Dragger
                         classes={draggerClassNames}
                         dragStart={(event) => handleDragStart(event, nodeNames.MSG_NODE, 'Message Node')}
                         content="message"
+                        icon={faCommentDots}
                     />
 
                     <Dragger

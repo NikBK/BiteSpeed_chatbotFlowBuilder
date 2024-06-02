@@ -6,6 +6,7 @@ import {
     useNodesState,
     useEdgesState,
 } from 'reactflow';
+import { edgeProperties } from '../edges';
 
 export const FlowContext = createContext();
 
@@ -16,21 +17,21 @@ const defaultNodes = [
         position: { x: 0, y: 0 },
         data: { label: 'Initial Message node' },
     },
-    {
-        id: 'node-2',
-        type: 'input-node',
-        position: { x: 50, y: 50 },
-        data: { label: 'Initial Input node' },
-    },
-    {
-        id: 'node-3',
-        position: { x: 100, y: 150 },
-        data: { label: 'Initial Default node' },
-    },
+    // {
+    //     id: 'node-2',
+    //     type: 'input-node',
+    //     position: { x: 25, y: 70 },
+    //     data: { label: 'Initial Input node' },
+    // },
+    // {
+    //     id: 'node-3',
+    //     position: { x: 50, y: 170 },
+    //     data: { label: 'Initial Default node' },
+    // },
     // {
     //     id: 'node-4',
     //     type: 'text-node',
-    //     position: { x: 150, y: 200 },
+    //     position: { x: 75, y: 220 },
     //     data: { label: 'Initial Text node' },
     // },
 
@@ -68,7 +69,10 @@ export const FlowContextProvider = ({ children }) => {
 
     const onConnect = useCallback(
         (params) => {
-            const connection = { ...params, animated: true };
+            const connection = {
+                ...params,
+                ...edgeProperties
+            };
             setEdges((eds) => addEdge(connection, eds))
         },
         [setEdges]
