@@ -1,18 +1,22 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import ReactFlow, { Background, Controls } from 'reactflow';
-import { NodesPanel } from "./NodesPanel";
+
 import { nodeTypes } from '../nodes';
 import { edgeTypes } from '../edges';
+import { FlowContext } from '../store';
+import { NodesPanel, SettingsPanel } from './index.js';
 
 
-const MainApp = ({ nodes, onNodesChange, edges, onEdgesChange, onConnect }) => {
+const Flow = () => {
+    const { nodes, edges, onNodesChange, onEdgesChange, onConnect } = useContext(FlowContext);
+
     return (
         <>
-            <aside className="w-20 py-20 px-10 bg-color-f0f0f0 flex flex-col justify-between" >
+            <aside className="w-10 py-20 px-10 bg-color-f0f0f0 flex flex-col justify-between" >
                 <NodesPanel />
             </aside>
 
-            <div className="flex-1">
+            <main className="flex-1">
                 <ReactFlow
                     nodes={nodes}
                     nodeTypes={nodeTypes}
@@ -26,9 +30,13 @@ const MainApp = ({ nodes, onNodesChange, edges, onEdgesChange, onConnect }) => {
                     <Background />
                     <Controls />
                 </ReactFlow>
-            </div>
+            </main>
+
+            <aside className="w-10 py-20 px-10 bg-color-f0f0f0 flex flex-col justify-between" >
+                <SettingsPanel />
+            </aside>
         </>
     );
 }
 
-export default MainApp;
+export default Flow;

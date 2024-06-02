@@ -1,42 +1,20 @@
-import { MessageNode } from "./MessageNode";
+import { InputNode } from "./InputNode";
+import { MsgNode } from "./MsgNode";
 import { PositionLoggerNode } from "./PositionLoggerNode";
 import { TextNode } from "./TextNode";
 
-export const initialNodes = [
-    // {
-    //     id: "a",
-    //     type: "input",
-    //     position: { x: 0, y: 0 },
-    //     data: { label: "wire" }
-    // },
-    // {
-    //     id: "b",
-    //     type: "position-logger",
-    //     position: { x: -100, y: 100 },
-    //     data: { label: "drag me!" },
-    // },
-    // {
-    //     id: "c",
-    //     position: { x: 100, y: 100 },
-    //     data: { label: "your ideas" }
-    // },
-    // {
-    //     id: "d",
-    //     type: "output",
-    //     position: { x: 0, y: 200 },
-    //     data: { label: "with React Flow" },
-    // },
-    {
-        id: "e",
-        type: "msg-node",
-        position: { x: 0, y: 300 },
-        data: { label: "My message node" },
-    },
-];
-
 export const nodeTypes = {
     "position-logger": PositionLoggerNode,
-    "msg-node": MessageNode,
+    "input-node": InputNode,
     "text-node": TextNode,
+    "msg-node": MsgNode,
     // Add any of your custom nodes here!
 };
+
+export const nodeNames = {
+    'POSITION_LOGGER_NODE': 'position-logger',
+    'INPUT_NODE': 'input-node',
+    'TEXT_NODE': 'text-node',
+    'MSG_NODE': 'msg-node',
+    'DEFAULT_NODE': 'node',
+}

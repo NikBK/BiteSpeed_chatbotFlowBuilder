@@ -3,7 +3,7 @@ import { Handle, Position } from "reactflow";
 
 const textAreaClassNames = "nodrag b-1-grey overflow-auto max-w-full min-w-100 max-h-200";
 
-export function MessageNode({ data }) {
+export function InputNode({ data }) {
     const [message, setMessage] = useState(data?.label || "");
 
     const handleChange = (event) => {

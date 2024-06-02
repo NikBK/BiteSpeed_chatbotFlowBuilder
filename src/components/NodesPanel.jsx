@@ -1,4 +1,6 @@
-import { Dragger } from "./Dragger";
+import { nodeNames } from "../nodes/index.js";
+import { Dragger } from "./index.js";
+
 
 const draggerClassNames = "p-8 text-center pointer b-1-ccc";
 
@@ -16,20 +18,26 @@ export const NodesPanel = () => {
                 <div className="flex flex-col gap-10">
                     <Dragger
                         classes={draggerClassNames}
-                        dragStart={(event) => handleDragStart(event, 'msg-node')}
+                        dragStart={(event) => handleDragStart(event, nodeNames.MSG_NODE, 'Message Node')}
                         content="message"
                     />
 
                     <Dragger
                         classes={draggerClassNames}
-                        dragStart={(event) => handleDragStart(event, 'text-node', 'text node')}
-                        content="text"
+                        dragStart={(event) => handleDragStart(event, nodeNames.INPUT_NODE)}
+                        content="input"
                     />
+
+                    {/* <Dragger
+                        classes={draggerClassNames}
+                        dragStart={(event) => handleDragStart(event, nodeNames.TEXT_NODE, 'Text Node')}
+                        content="text"
+                    /> */}
 
                     <Dragger
                         classes={draggerClassNames}
-                        dragStart={(event) => handleDragStart(event, 'node', 'testing node')}
-                        content="non-message"
+                        dragStart={(event) => handleDragStart(event, nodeNames.DEFAULT_NODE, 'Default Node')}
+                        content="default"
                     />
                 </div>
             </div>
