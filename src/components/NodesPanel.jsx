@@ -44,7 +44,7 @@ export const NodesPanel = () => {
                 </div>
             </div>
 
-            <button className="pointer">Save Changes</button>
+            <button className="pointer p-10 custom-button">Save Changes</button>
         </>
     );
 };

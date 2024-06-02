@@ -11,3 +11,8 @@ export const edgeProperties = {
     },
     style: { stroke: 'rgb(118 198 255)', strokeWidth: 2 },
 }
+
+export const connectionLineStyle = {
+    strokeWidth: 2,
+    stroke: 'black',
+};

@@ -7,14 +7,15 @@ export const MsgNode = ({ id, data }) => {
     const [val, setVal] = useState(data.label || '');
 
     const [selected, setSelected] = useState(false);
-    const { ref } = useContext(FlowContext);
+    const { ref, setSettingsPanelVisible } = useContext(FlowContext);
     const nodeRef = useRef(null);
 
     const onClick = (e) => {
         ref.current.value = val;
         ref.id = id;
         ref.fn = setVal;
-        setSelected(true)
+        setSelected(true);
+        setSettingsPanelVisible(true);
     };
 
     const sourceConnect = ({ nodeId, connectedEdges }) => {
@@ -36,17 +37,19 @@ export const MsgNode = ({ id, data }) => {
     }, []);
 
     return (
-        <div
-            ref={nodeRef}
-            className={`react-flow__node-default p-0 selectable ${selected ? 'selected' : ''}`}
-            onClick={onClick}
-        >
-            <CustomHandle type="target" position={Position.Left} id='msg-target' />
-            <div className='custom-shadow'>
-                <div className='bg-color-b2f0e3'>Send Message</div>
-                <div className='min-h-8 px-5'>{val}</div>
-            </div>
-            <CustomHandle type="source" position={Position.Right} id='msg-source' isConnectable={sourceConnect} />
-        </div >
+        <>
+            <div
+                ref={nodeRef}
+                className={`react-flow__node-default p-0 selectable ${selected ? 'selected' : ''}`}
+                onClick={onClick}
+            >
+                <CustomHandle type="target" position={Position.Left} id='msg-target' />
+                <div className='custom-shadow'>
+                    <div className='bg-color-b2f0e3'>Send Message</div>
+                    <div className='min-h-8 px-5'>{val}</div>
+                </div>
+                <CustomHandle type="source" position={Position.Right} id='msg-source' isConnectable={sourceConnect} />
+            </div >
+        </>
     );
 };

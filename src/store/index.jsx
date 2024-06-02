@@ -1,4 +1,4 @@
-import React, { createContext, useCallback, useEffect, useRef } from 'react';
+import React, { createContext, useCallback, useEffect, useRef, useState } from 'react';
 import {
     addEdge,
     applyEdgeChanges,
@@ -54,6 +54,8 @@ if (!localEdges) {
 }
 
 export const FlowContextProvider = ({ children }) => {
+    const [settingsPanelVisible, setSettingsPanelVisible] = useState(false);
+
     const [nodes, setNodes] = useNodesState(initialNodes);
     const [edges, setEdges] = useEdgesState(initialEdges);
 
@@ -94,6 +96,8 @@ export const FlowContextProvider = ({ children }) => {
         onEdgesChange,
         onConnect,
         ref,
+        settingsPanelVisible,
+        setSettingsPanelVisible,
     };
 
     return (

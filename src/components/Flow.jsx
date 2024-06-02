@@ -2,23 +2,22 @@ import React, { useContext } from 'react';
 import ReactFlow, { Background, Controls } from 'reactflow';
 
 import { nodeTypes } from '../nodes';
-import { edgeTypes } from '../edges';
+import { edgeTypes, connectionLineStyle } from '../edges';
 import { FlowContext } from '../store';
 import { NodesPanel, SettingsPanel } from './index.js';
 
 
-const connectionLineStyle = {
-    strokeWidth: 2,
-    stroke: 'black',
-};
-
 const Flow = () => {
-    const { nodes, edges, onNodesChange, onEdgesChange, onConnect } = useContext(FlowContext);
+    const { nodes, edges, onNodesChange, onEdgesChange, onConnect, settingsPanelVisible } = useContext(FlowContext);
 
     return (
         <>
-            <aside className="w-10 py-20 px-10 bg-color-f0f0f0 flex flex-col justify-between" >
+            <aside className="w-20 py-20 px-10 bg-color-f0f0f0 flex flex-col justify-between">
                 <NodesPanel />
+                {/* {settingsPanelVisible ? <SettingsPanel /> : <NodesPanel />} */}
+            </aside>
+            <aside className={`w-20 py-20 px-10 bg-color-f0f0f0 flex flex-col justify-between ${!settingsPanelVisible && 'hidden'}`} style={{ position: 'absolute', top: '0', left: '0', zIndex: '2' }} >
+                <SettingsPanel />
             </aside>
 
             <main className="flex-1">
@@ -38,9 +37,7 @@ const Flow = () => {
                 </ReactFlow>
             </main>
 
-            <aside className="w-10 py-20 px-10 bg-color-f0f0f0 flex flex-col justify-between" >
-                <SettingsPanel />
-            </aside>
+
         </>
     );
 }

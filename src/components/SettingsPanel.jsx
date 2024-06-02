@@ -1,8 +1,10 @@
 import React, { useContext } from 'react';
 import { FlowContext } from '../store';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
 export const SettingsPanel = () => {
-    const { setNodes, ref } = useContext(FlowContext);
+    const { setNodes, ref, setSettingsPanelVisible } = useContext(FlowContext);
 
     const handleUpdate = (e) => {
         if (ref.current && ref.current.value.trim() && ref.id) {
@@ -19,22 +21,28 @@ export const SettingsPanel = () => {
                 })
             );
         }
+        closeSettingsPanel();
     };
+
+    const closeSettingsPanel = () => setSettingsPanelVisible(false);
 
     return (
         <div className='bg-color-f1f0f1 h-100vh p-10 items-center'>
-            <h2 className='text-center'>Message</h2>
+            <h3 className='text-center'>Message</h3>
             <div className='flex flex-col gap-10'>
                 <textarea
                     type="text"
                     name='text'
                     ref={ref}
-                    className='max-h-200 max-w-200 min-w-60 min-h-20'
+                    className='max-w-full min-w-60 max-h-200 min-h-40'
                 />
-                <button onClick={handleUpdate} className='pointer'>
+                <button onClick={handleUpdate} className='pointer custom-button'>
                     Update
                 </button>
             </div>
+            <button className='pointer absolute top-10 right-10 outline-none border-none font-20' onClick={closeSettingsPanel}>
+                <FontAwesomeIcon icon={faArrowRight} />
+            </button>
         </div>
     );
 };
