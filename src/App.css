@@ -59,12 +59,24 @@ body,
     height: 100vh;
 }
 
+.h-full {
+    height: 100%;
+}
+
 .flex {
     display: flex;
 }
 
 .flex-col {
     flex-direction: column;
+}
+
+.flex-auto {
+    flex: auto;
+}
+
+.justify-start {
+    justify-content: start;
 }
 
 .gap-10 {
@@ -162,12 +174,24 @@ body,
     position: absolute;
 }
 
+.top-0 {
+    top: 0;
+}
+
+.left-0 {
+    left: 0;
+}
+
 .top-10 {
     top: 10px;
 }
 
 .right-10 {
     right: 10px;
+}
+
+.right-0 {
+    right: 0;
 }
 
 .outline-none {
@@ -180,6 +204,10 @@ body,
 
 .font-20 {
     font-size: 20px;
+}
+
+.zIndex-2 {
+    z-index: 2;
 }
 
 .custom-button {
@@ -198,4 +226,32 @@ body,
 
 .custom-button:hover {
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+
+@media screen and (max-width: 620px) {
+    #root>div {
+        flex-direction: column;
+    }
+
+    #root>div aside {
+        flex-direction: row;
+        width: 100%;
+        align-items: center;
+        height: max-content;
+    }
+
+    #root>div aside>div {
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
+
+    #root>div aside>div>textarea {
+        max-width: max-content;
+    }
+
+    .custom-button {
+        padding: 5px;
+    }
 }

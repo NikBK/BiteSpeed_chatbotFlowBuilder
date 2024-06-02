@@ -12,11 +12,10 @@ const Flow = () => {
 
     return (
         <>
-            <aside className="w-20 py-20 px-10 bg-color-f0f0f0 flex flex-col justify-between">
+            <aside className={`w-20 py-20 px-10 bg-color-f0f0f0 flex flex-col justify-between ${settingsPanelVisible && 'hidden'}`}>
                 <NodesPanel />
-                {/* {settingsPanelVisible ? <SettingsPanel /> : <NodesPanel />} */}
             </aside>
-            <aside className={`w-20 py-20 px-10 bg-color-f0f0f0 flex flex-col justify-between ${!settingsPanelVisible && 'hidden'}`} style={{ position: 'absolute', top: '0', left: '0', zIndex: '2' }} >
+            <aside className={`w-20 py-20 px-10 bg-color-f0f0f0 flex flex-col h-full justify-start absolute top-0 left-0 zIndex-2 ${!settingsPanelVisible && 'hidden'}`} >
                 <SettingsPanel />
             </aside>
 

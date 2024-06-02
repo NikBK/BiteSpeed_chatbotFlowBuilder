@@ -27,7 +27,7 @@ export const SettingsPanel = () => {
     const closeSettingsPanel = () => setSettingsPanelVisible(false);
 
     return (
-        <div className='bg-color-f1f0f1 h-100vh p-10 items-center'>
+        <>
             <h3 className='text-center'>Message</h3>
             <div className='flex flex-col gap-10'>
                 <textarea
@@ -43,6 +43,6 @@ export const SettingsPanel = () => {
             <button className='pointer absolute top-10 right-10 outline-none border-none font-20' onClick={closeSettingsPanel}>
                 <FontAwesomeIcon icon={faArrowRight} />
             </button>
-        </div>
+        </>
     );
 };
