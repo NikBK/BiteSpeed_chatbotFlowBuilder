@@ -29,7 +29,7 @@ const HomeLayout = ({ children }) => {
 
     return (
         <div
-            className="flex h-100vh"
+            className="flex h-100vh relative"
             onDrop={handleDrop}
             onDragOver={handleDragOver}
         >

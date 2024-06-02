@@ -10,34 +10,101 @@ import { edgeProperties } from '../edges';
 
 export const FlowContext = createContext();
 
+// const defaultNodes = [
+//     {
+//         id: 'node-1',
+//         type: 'msg-node',
+//         position: { x: 0, y: 0 },
+//         data: { label: 'Initial Message node' },
+//     },
+//     // {
+//     //     id: 'node-2',
+//     //     type: 'input-node',
+//     //     position: { x: 25, y: 70 },
+//     //     data: { label: 'Initial Input node' },
+//     // },
+//     // {
+//     //     id: 'node-3',
+//     //     position: { x: 50, y: 170 },
+//     //     data: { label: 'Initial Default node' },
+//     // },
+//     // {
+//     //     id: 'node-4',
+//     //     type: 'text-node',
+//     //     position: { x: 75, y: 220 },
+//     //     data: { label: 'Initial Text node' },
+//     // },
+
+// ];
+
 const defaultNodes = [
     {
-        id: 'node-1',
-        type: 'msg-node',
-        position: { x: 0, y: 0 },
-        data: { label: 'Initial Message node' },
+        "id": "node-1",
+        "type": "msg-node",
+        "position": {
+            "x": -177,
+            "y": 91
+        },
+        "data": {
+            "label": "Initial Message node"
+        },
     },
-    // {
-    //     id: 'node-2',
-    //     type: 'input-node',
-    //     position: { x: 25, y: 70 },
-    //     data: { label: 'Initial Input node' },
-    // },
-    // {
-    //     id: 'node-3',
-    //     position: { x: 50, y: 170 },
-    //     data: { label: 'Initial Default node' },
-    // },
-    // {
-    //     id: 'node-4',
-    //     type: 'text-node',
-    //     position: { x: 75, y: 220 },
-    //     data: { label: 'Initial Text node' },
-    // },
-
+    {
+        "id": "1717358532441",
+        "type": "msg-node",
+        "position": {
+            "x": 218.51171875,
+            "y": -15
+        },
+        "data": {
+            "label": "Message Node"
+        },
+    },
+    {
+        "id": "1717358533565",
+        "type": "msg-node",
+        "position": {
+            "x": 24.51171875,
+            "y": 38
+        },
+        "data": {
+            "label": "Message Node"
+        },
+    }
 ];
 
-const defaultEdges = [];
+const defaultEdges = [
+    {
+        "source": "node-1",
+        "sourceHandle": "msg-source",
+        "target": "1717358533565",
+        "targetHandle": "msg-target",
+        "animated": true,
+        "markerEnd": {
+            "type": "arrowclosed"
+        },
+        "style": {
+            "stroke": "rgb(118 198 255)",
+            "strokeWidth": 2
+        },
+        "id": "reactflow__edge-node-1msg-source-1717358533565msg-target"
+    },
+    {
+        "source": "1717358533565",
+        "sourceHandle": "msg-source",
+        "target": "1717358532441",
+        "targetHandle": "msg-target",
+        "animated": true,
+        "markerEnd": {
+            "type": "arrowclosed"
+        },
+        "style": {
+            "stroke": "rgb(118 198 255)",
+            "strokeWidth": 2
+        },
+        "id": "reactflow__edge-1717358533565msg-source-1717358532441msg-target"
+    }
+];
 
 const localNodes = window.localStorage.getItem('nodes');
 const initialNodes = localNodes ? JSON.parse(localNodes) : defaultNodes;
