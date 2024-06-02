@@ -1,15 +1,46 @@
+import { useContext } from "react";
 import { nodeNames } from "../nodes/index.js";
 import { Dragger } from "./index.js";
 import { faCommentDots } from '@fortawesome/free-regular-svg-icons';
+import { FlowContext } from "../store/index.jsx";
+import { Bounce, toast } from 'react-toastify';
+
+const toastOptions = {
+    position: "top-right",
+    autoClose: 2000,
+    hideProgressBar: true,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "dark",
+    transition: Bounce,
+};
 
 
 const draggerClassNames = "p-8 text-center pointer b-1-ccc text-5d69b3";
 
 export const NodesPanel = () => {
+    const { nodes, edges } = useContext(FlowContext);
+
     const handleDragStart = (event, type, msg) => {
         const data = JSON.stringify({ type, msg });
         event.dataTransfer.setData('application/reactflow', data);
     };
+
+    const handleFlowSave = () => {
+        const connectedTargets = (new Set(edges.map(edge => edge.target))).size;
+
+        if (connectedTargets < nodes.length - 1) {
+            toast.error("Cannot save flow", toastOptions);
+        }
+        else {
+            window.localStorage.setItem('nodes', JSON.stringify(nodes));
+            window.localStorage.setItem('edges', JSON.stringify(edges));
+            toast.success("Flow saved", toastOptions);
+        }
+
+    }
 
     return (
         <>
@@ -42,7 +73,7 @@ export const NodesPanel = () => {
                 />
             </div>
 
-            <button className="pointer p-10 custom-button">Save Changes</button>
+            <button className="pointer p-10 custom-button" onClick={handleFlowSave}>Save Changes</button>
         </>
     );
 };

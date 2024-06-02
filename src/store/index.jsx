@@ -82,10 +82,16 @@ export const FlowContextProvider = ({ children }) => {
 
     const ref = useRef('settings');
 
-    useEffect(() => {
-        window.localStorage.setItem('nodes', JSON.stringify(nodes));
-        window.localStorage.setItem('edges', JSON.stringify(edges));
-    }, [nodes, edges]);
+    // const handleFlowSave = () => {
+
+    //     window.localStorage.setItem('nodes', JSON.stringify(nodes));
+    //     window.localStorage.setItem('edges', JSON.stringify(edges));
+    // }
+
+    // useEffect(() => {
+    //     window.localStorage.setItem('nodes', JSON.stringify(nodes));
+    //     window.localStorage.setItem('edges', JSON.stringify(edges));
+    // }, [nodes, edges]);
 
     const data = {
         nodes,
@@ -98,6 +104,7 @@ export const FlowContextProvider = ({ children }) => {
         ref,
         settingsPanelVisible,
         setSettingsPanelVisible,
+        // handleFlowSave,
     };
 
     return (
