@@ -3,24 +3,32 @@ import { FlowContext } from '../store';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
+
+// SettingsPanel component for updating node labels
 export const SettingsPanel = () => {
     const { setNodes, ref, setSettingsPanelVisible } = useContext(FlowContext);
 
+    // Update the selected node label and close the settingsPanel
     const handleUpdate = (e) => {
-        if (ref.current && ref.current.value.trim() && ref.id) {
-            setNodes((nds) =>
-                nds.map((nd) => {
-                    if (nd.id === ref.id) {
-                        nd.data.label = ref.current.value;
-                        ref.fn(ref.current.value);
-                        ref.current.value = '';
-                        ref.id = null;
-                        ref.fn = null;
-                    }
-                    return nd;
-                })
-            );
-        }
+        const inputValue = ref.current.value.trim();
+        const nodeId = ref.id;
+
+        if (!inputValue || !nodeId) return;
+
+        setNodes((nodes) => {
+            return nodes.map((node) => {
+                if (node.id === nodeId) {
+                    node.data.label = inputValue;
+                    ref.fn(inputValue);
+                    ref.current.value = '';
+                    ref.id = null;
+                    ref.fn = null;
+                }
+                return node;
+            });
+        });
+
+        // Closing settings panel after update
         closeSettingsPanel();
     };
 
@@ -40,7 +48,7 @@ export const SettingsPanel = () => {
                     Update
                 </button>
             </div>
-            <button className='pointer absolute top-10 right-10 outline-none border-none font-20' onClick={closeSettingsPanel}>
+            <button onClick={closeSettingsPanel} className='pointer absolute top-10 right-10 outline-none border-none font-20'>
                 <FontAwesomeIcon icon={faArrowRight} />
             </button>
         </>

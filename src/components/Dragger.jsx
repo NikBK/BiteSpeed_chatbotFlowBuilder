@@ -1,6 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React from 'react';
 
+
+// Dragger component for dragging nodes
 export const Dragger = ({ dragStart, classes, content, icon }) => {
     return (
         <div draggable onDragStart={dragStart} className={classes} title={content}>

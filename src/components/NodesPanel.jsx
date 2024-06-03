@@ -1,45 +1,33 @@
 import { useContext } from "react";
+import { faCommentDots, faKeyboard, faCircleDot } from '@fortawesome/free-regular-svg-icons';
+import { FlowContext } from "../store/index.jsx";
 import { nodeNames } from "../nodes/index.js";
 import { Dragger } from "./index.js";
-import { faCommentDots } from '@fortawesome/free-regular-svg-icons';
-import { FlowContext } from "../store/index.jsx";
-import { Bounce, toast } from 'react-toastify';
+import { displayToast, saveFlowToLocalStorage } from "../utils/index.js";
 
-const toastOptions = {
-    position: "top-right",
-    autoClose: 2000,
-    hideProgressBar: true,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-    theme: "dark",
-    transition: Bounce,
-};
-
-
+// CSS class names for Dragger component
 const draggerClassNames = "p-8 text-center pointer b-1-ccc text-5d69b3";
 
-export const NodesPanel = () => {
-    const { nodes, edges } = useContext(FlowContext);
 
+export const NodesPanel = () => {
+    const { nodes, edges, handleFlowSave } = useContext(FlowContext);
+
+    // Adding 'type' and 'msg' to the event dataTransfer during drag start
     const handleDragStart = (event, type, msg) => {
         const data = JSON.stringify({ type, msg });
         event.dataTransfer.setData('application/reactflow', data);
     };
 
-    const handleFlowSave = () => {
-        const connectedTargets = (new Set(edges.map(edge => edge.target))).size;
+    // Validates flow save condition and saves the flow to local storage
+    const saveFlow = () => {
+        const { status, message } = handleFlowSave();
 
-        if (connectedTargets < nodes.length - 1) {
-            toast.error("Cannot save flow", toastOptions);
-        }
-        else {
-            window.localStorage.setItem('nodes', JSON.stringify(nodes));
-            window.localStorage.setItem('edges', JSON.stringify(edges));
-            toast.success("Flow saved", toastOptions);
+        if (status === 'success') {
+            saveFlowToLocalStorage('nodes', nodes);
+            saveFlowToLocalStorage('edges', edges);
         }
 
+        displayToast(message, status);
     }
 
     return (
@@ -47,6 +35,8 @@ export const NodesPanel = () => {
             <h3 className="text-center">Nodes Panel</h3>
 
             <div className="flex flex-col flex-auto gap-10">
+
+                {/* Dragger for Message Node */}
                 <Dragger
                     classes={draggerClassNames}
                     dragStart={(event) => handleDragStart(event, nodeNames.MSG_NODE, 'Message Node')}
@@ -54,26 +44,33 @@ export const NodesPanel = () => {
                     icon={faCommentDots}
                 />
 
+                {/* Dragger for Input Node */}
                 <Dragger
                     classes={draggerClassNames}
                     dragStart={(event) => handleDragStart(event, nodeNames.INPUT_NODE)}
                     content="input"
+                    icon={faKeyboard}
                 />
 
+                {/* Dragger for Text Node */}
                 {/* <Dragger
                         classes={draggerClassNames}
                         dragStart={(event) => handleDragStart(event, nodeNames.TEXT_NODE, 'Text Node')}
                         content="text"
                     /> */}
 
+                {/* Dragger for Default Node */}
                 <Dragger
                     classes={draggerClassNames}
                     dragStart={(event) => handleDragStart(event, nodeNames.DEFAULT_NODE, 'Default Node')}
                     content="default"
+                    icon={faCircleDot}
                 />
             </div>
 
-            <button className="pointer p-10 custom-button" onClick={handleFlowSave}>Save Changes</button>
+            <button onClick={saveFlow} className="pointer p-10 custom-button">
+                Save Changes
+            </button>
         </>
     );
 };

@@ -1,4 +1,4 @@
-import React, { createContext, useCallback, useEffect, useRef, useState } from 'react';
+import React, { createContext, useCallback, useRef, useState } from 'react';
 import {
     addEdge,
     applyEdgeChanges,
@@ -7,36 +7,13 @@ import {
     useEdgesState,
 } from 'reactflow';
 import { edgeProperties } from '../edges';
+import { initializeLocalStorage } from '../utils';
 
+
+// Creating context for flow data management
 export const FlowContext = createContext();
 
-// const defaultNodes = [
-//     {
-//         id: 'node-1',
-//         type: 'msg-node',
-//         position: { x: 0, y: 0 },
-//         data: { label: 'Initial Message node' },
-//     },
-//     // {
-//     //     id: 'node-2',
-//     //     type: 'input-node',
-//     //     position: { x: 25, y: 70 },
-//     //     data: { label: 'Initial Input node' },
-//     // },
-//     // {
-//     //     id: 'node-3',
-//     //     position: { x: 50, y: 170 },
-//     //     data: { label: 'Initial Default node' },
-//     // },
-//     // {
-//     //     id: 'node-4',
-//     //     type: 'text-node',
-//     //     position: { x: 75, y: 220 },
-//     //     data: { label: 'Initial Text node' },
-//     // },
-
-// ];
-
+// Initial nodes configuration
 const defaultNodes = [
     {
         "id": "node-1",
@@ -73,6 +50,7 @@ const defaultNodes = [
     }
 ];
 
+// Initial edges configuration
 const defaultEdges = [
     {
         "source": "node-1",
@@ -106,36 +84,36 @@ const defaultEdges = [
     }
 ];
 
-const localNodes = window.localStorage.getItem('nodes');
-const initialNodes = localNodes ? JSON.parse(localNodes) : defaultNodes;
+// Setup 'nodes' in localStorage
+const { initialData: initialNodes } = initializeLocalStorage('nodes', defaultNodes);
 
-if (!localNodes) {
-    window.localStorage.setItem('nodes', JSON.stringify(initialNodes));
-}
+// Setup 'edges' in localStorage
+const { initialData: initialEdges } = initializeLocalStorage('edges', defaultEdges);
 
-const localEdges = window.localStorage.getItem('edges');
-const initialEdges = localEdges ? JSON.parse(localEdges) : defaultEdges;
-
-if (!localEdges) {
-    window.localStorage.setItem('edges', JSON.stringify(initialEdges));
-}
 
 export const FlowContextProvider = ({ children }) => {
+    // State for settings panel visibility
     const [settingsPanelVisible, setSettingsPanelVisible] = useState(false);
+
+    // Reference for settings input field
+    const ref = useRef('settings');
 
     const [nodes, setNodes] = useNodesState(initialNodes);
     const [edges, setEdges] = useEdgesState(initialEdges);
 
+    // Callback function for updating nodes
     const onNodesChange = useCallback(
         (changes) => setNodes((nds) => applyNodeChanges(changes, nds)),
         [setNodes]
     );
 
+    // Callback function for updating edges
     const onEdgesChange = useCallback(
         (changes) => setEdges((eds) => applyEdgeChanges(changes, eds)),
         [setEdges]
     );
 
+    // Callback function for adding new edge
     const onConnect = useCallback(
         (params) => {
             const connection = {
@@ -147,18 +125,18 @@ export const FlowContextProvider = ({ children }) => {
         [setEdges]
     );
 
-    const ref = useRef('settings');
+    // Validates flow save condition
+    const handleFlowSave = () => {
+        const connectedTargets = (new Set(edges.map(edge => edge.target))).size;
 
-    // const handleFlowSave = () => {
-
-    //     window.localStorage.setItem('nodes', JSON.stringify(nodes));
-    //     window.localStorage.setItem('edges', JSON.stringify(edges));
-    // }
-
-    // useEffect(() => {
-    //     window.localStorage.setItem('nodes', JSON.stringify(nodes));
-    //     window.localStorage.setItem('edges', JSON.stringify(edges));
-    // }, [nodes, edges]);
+        // Check whether more than 1 target handle is not connected by an edge
+        if (connectedTargets < nodes.length - 1) {
+            return { status: 'error', message: 'Cannot save flow' };
+        }
+        else {
+            return { status: 'success', message: 'Flow saved' };
+        }
+    }
 
     const data = {
         nodes,
@@ -171,9 +149,10 @@ export const FlowContextProvider = ({ children }) => {
         ref,
         settingsPanelVisible,
         setSettingsPanelVisible,
-        // handleFlowSave,
+        handleFlowSave,
     };
 
+    {/* Providing flow context to children */ }
     return (
         <FlowContext.Provider value={data}>
             {children}

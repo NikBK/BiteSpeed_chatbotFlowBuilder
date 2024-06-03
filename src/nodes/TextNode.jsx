@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Handle, Position } from "reactflow";
 
 
+// TextNode component for displaying text
 export function TextNode({ data }) {
     const [message, setMessage] = useState(data?.label || "");
 

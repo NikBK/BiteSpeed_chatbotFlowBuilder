@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { Handle, Position } from "reactflow";
 
+// CSS class names for textarea
 const textAreaClassNames = "nodrag b-1-grey overflow-auto max-w-full min-w-100 max-h-200";
 
+
+// InputNode component for handling user input
 export function InputNode({ id, data }) {
     const [message, setMessage] = useState(data?.label || "");
 

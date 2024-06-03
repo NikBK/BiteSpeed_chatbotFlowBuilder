@@ -3,6 +3,7 @@ import { MsgNode } from "./MsgNode";
 import { PositionLoggerNode } from "./PositionLoggerNode";
 import { TextNode } from "./TextNode";
 
+// Mapping node type to their corresponding components
 export const nodeTypes = {
     "position-logger": PositionLoggerNode,
     "input-node": InputNode,
@@ -11,6 +12,7 @@ export const nodeTypes = {
     // Add any of your custom nodes here!
 };
 
+// Mapping node names to their corresponding types for easier uasge
 export const nodeNames = {
     'POSITION_LOGGER_NODE': 'position-logger',
     'INPUT_NODE': 'input-node',
