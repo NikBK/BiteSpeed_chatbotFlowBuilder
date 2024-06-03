@@ -1,4 +1,4 @@
-# BiteSpeed Chatbot Flow Builder
+# [BiteSpeed Chatbot Flow Builder](https://nikbk-chatbot-flow.netlify.app/)
 
 ## Overview
 
@@ -15,7 +15,7 @@ The BiteSpeed Chatbot Flow Builder is a React app built using ReactFlow that all
 
 ## Hosted App 
 
-
+https://nikbk-chatbot-flow.netlify.app/
 
 ## Dependencies
 
@@ -25,4 +25,3 @@ The following dependencies are used in this project:
 - ReactFlow
 - React-Toastify
 - Other dependencies (listed in `package.json`)
-
